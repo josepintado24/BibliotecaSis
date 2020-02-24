@@ -1,12 +1,13 @@
-<?php 
+<?php
+include ('Model.php');
 class ReservaModel extends Model {
 
-	public function set( $reserva_data = array() ) {
-		foreach ($reserva_data as $key => $value) {
-			$$key = $value;
-		}
-		$this->query = "REPLACE INTO reserva(code_reserva,code_alumno,fecha_reserva,estado_reserva,code_usuario)
-                        VALUES ($code_reserva,$code_alumno,$fecha_reserva,$estado_reserva,$code_usuario)";
+	public function set($code_alum ,$code_usu) {
+        $code_alumno=$code_alum;
+        $code_usuario=$code_usu;
+
+		$this->query = "INSERT INTO reserva (code_reserva, code_alumno, fecha_reserva, estado_reserva, code_usuario) VALUES (
+                        NULL, '$code_alumno', current_timestamp(), '1', '$code_usuario')";
 		$this->set_query();
 	}
 

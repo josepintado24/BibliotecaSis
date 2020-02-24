@@ -1,6 +1,7 @@
 <?php
 $reserva_controller=new ReservaController();
 $reserva=$reserva_controller->get();
+
 if(empty($reserva)){
     print ('<h1>No hay Reserva</h1>>');
 }else{
@@ -52,7 +53,7 @@ if(empty($reserva)){
 
                 <p>Ingrese codigo alumno</p>
                 <div class="input-group input-group-sm">
-                <form action="" id="resgitroAlumno">
+                <form action="" id="resgitroAlumno_form">
                       <input type="text" class="form-control" placeholder="Codigo Estudiante" id="code_alumno">
                       <span class="input-group-append">
                         <button type="submit" class="btn btn-info btn-flat">Gargar</button>

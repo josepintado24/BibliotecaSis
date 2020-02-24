@@ -17,7 +17,7 @@ abstract class Model {
 	protected $rows = array();
 
 	abstract protected function get();
-	abstract protected function set();
+	abstract protected function set($code_alum ,$code_usu);
 	abstract protected function del();
 
 
@@ -52,10 +52,21 @@ abstract class Model {
 	}
     protected function get_query_ajax() {
         $this->db_open();
-
+        $json = array();
         $result = $this->conn->query($this->query);
+        while($row = mysqli_fetch_array($result)) {
+            $json[] = array(
+                'code_alumno' => $row['code_alumno'],
+                'nombre_alumno' => $row['nombre_alumno'],
+                'numero_expediente' => $row['numero_expediente'],
+                'turno' => $row['turno'],
+                'estado' => $row['estado']
+            );
+        }
         $result->close();
         $this->db_close();
-        return $result;
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
+        return ($jsonstring);
     }
 }

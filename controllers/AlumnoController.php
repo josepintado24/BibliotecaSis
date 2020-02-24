@@ -1,5 +1,5 @@
 <?php 
-
+include ('../models/AlumnoModel.php');
 class AlumnoController {
 	private $model;
 
@@ -7,8 +7,8 @@ class AlumnoController {
 		$this->model = new AlumnoModel();
 	}
 
-	public function set( $usuario_data = array() ) {
-		return $this->model->set($usuario_data);
+	public function set( $propietario_data1, $propietario_data) {
+		return $this->model->set($propietario_data);
 	}
 
 	public function get( $code_alumno = '' ) {

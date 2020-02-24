@@ -93,7 +93,8 @@ $template='
         </div>
         <div class="info">
           <a href="#" class="d-block" id="nombreUser" > %s </a>
-          <a type="hidden" class="d-block" id="code_usuario" > %s </a>
+          <div id="code_usuario">
+          <p class="d-block" id="code_usuario_num" >%s</p></div>
         </div>
       </div>
 

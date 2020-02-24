@@ -1,7 +1,8 @@
-<?php 
+<?php
+include ('Model.php');
 class AlumnoModel extends Model {
 
-	public function set( $propietario_data = array() ) {
+	public function set( $propietario_data1, $propietario_data ) {
 		foreach ($propietario_data as $key => $value) {
 			$$key = $value;
 		}
@@ -26,23 +27,11 @@ class AlumnoModel extends Model {
 		return $data;
 	}
     public function getAlumno( $nombre_alumno = '' ) {
-        $this->query = "SELECT * FROM alumno WHERE code_usuario loke '$nombre_alumno%'";
-            ;
+        $this->query = "SELECT * FROM alumno WHERE nombre_alumno LIKE '$nombre_alumno%'";
+
 
         $result=$this->get_query_ajax();
-        $json = array();
-        while($row = mysqli_fetch_array($result)) {
-            $json[] = array(
-                'code_alumno' => $row['code_alumno'],
-                'nombre_alumno' => $row['nombre_alumno'],
-                'numero_expediente' => $row['numero_expediente'],
-                'turno' => $row['turno'],
-                'estado' => $row['estado']
-            );
-        }
-        $jsonstring = json_encode($json);
-        echo $jsonstring;
-        return  $jsonstring;
+        return  $result;
     }
 
 	public function del( $code_usuario = '' ) {

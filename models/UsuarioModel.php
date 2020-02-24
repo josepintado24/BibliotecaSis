@@ -1,8 +1,8 @@
 <?php 
 class UsuarioModel extends Model {
 
-	public function set( $propietario_data = array() ) {
-		foreach ($propietario_data as $key => $value) {
+	public function set( $code_alum ,$code_usu ) {
+		foreach ($code_alum as $key => $value) {
 			$$key = $value;
 		}
 		$this->query = "REPLACE INTO usuario(code_usuario,nombre_usuario,tipo_usuario,estado_usuario,password)

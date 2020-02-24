@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+include('../models/ReservaModel.php');
 
 class ReservaController {
 	private $model;
@@ -7,8 +9,8 @@ class ReservaController {
 		$this->model = new ReservaModel();
 	}
 
-	public function set( $rserva_data = array() ) {
-		return $this->model->set($rserva_data);
+	public function set( $code_alum ,$code_usu ) {
+		return $this->model->set($code_alum ,$code_usu);
 	}
 
 	public function get( $code_reserva = '' ) {

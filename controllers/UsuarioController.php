@@ -7,8 +7,8 @@ class UsuarioController {
 		$this->model = new UsuarioModel();
 	}
 
-	public function set( $usuario_data = array() ) {
-		return $this->model->set($usuario_data);
+	public function set( $code_alum ,$code_alum) {
+		return $this->model->set($code_alum);
 	}
 
 	public function get( $code_alumno = '' ) {
