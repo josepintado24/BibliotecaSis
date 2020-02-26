@@ -17,6 +17,10 @@ class ReservaController {
 		return $this->model->get($code_reserva);
 	}
 
+    public function serachReserva( $code_alum) {
+        return $this->model->searchReserva($code_alum);
+    }
+
 		public function del( $code_reserva = '' ) {
 		return $this->model->dele($code_reserva);
 	}

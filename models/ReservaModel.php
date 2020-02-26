@@ -5,10 +5,15 @@ class ReservaModel extends Model {
 	public function set($code_alum ,$code_usu) {
         $code_alumno=$code_alum;
         $code_usuario=$code_usu;
-
-		$this->query = "INSERT INTO reserva (code_reserva, code_alumno, fecha_reserva, estado_reserva, code_usuario) VALUES (
+        $mensaje=false;
+        if ($this->searchReserva($code_alumno)<=0){
+            $this->query = "INSERT INTO reserva (code_reserva, code_alumno, fecha_reserva, estado_reserva, code_usuario) VALUES (
                         NULL, '$code_alumno', current_timestamp(), '1', '$code_usuario')";
-		$this->set_query();
+            $this->set_query();
+            $mensaje=true;
+        }
+        return $mensaje;
+
 	}
 
 	public function get( $code_reserva = '' ) {
@@ -26,7 +31,15 @@ class ReservaModel extends Model {
 
 		return $data;
 	}
+    public function searchReserva( $code_alum) {
+        $this->query = "select * from reserva where code_alumno='$code_alum' and CAST(fecha_reserva AS DATE) = CAST(NOW() AS DATE)";
 
+        $this->get_query();
+        $num_rows = count($this->rows);
+
+        echo $num_rows;
+        return $num_rows;
+    }
 	public function del( $code_reserva = '' ) {
 		$this->query = "DELETE FROM reserva WHERE code_reserva = $code_reserva";
 		$this->set_query();

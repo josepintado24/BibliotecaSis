@@ -12,7 +12,6 @@ if(empty($reserva)){
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Reservar </h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -21,14 +20,14 @@ if(empty($reserva)){
             </ol>
             
           </div>
-          <ul class="navar-nav ml-auto">
+          <!--<ul class="navar-nav ml-auto">
                 <form class="form-inline my-2 my-lg-0">
                     <input type="search" id="search" class="form-control mr-sm-2" placeholder="Buscar Estudiante">
                     <button class="btn btn-success my-2 my-sm-0" type="submit" >
                     Buscar
                     </button>
                 </form>
-            </ul>
+          </ul>-->
         </div>
         <div class="card my-4" id="resultadoAlumno">
             <div class="card-body">
@@ -49,23 +48,22 @@ if(empty($reserva)){
               </div>
               <div class="card-body">
                 
-                
-
-                <p>Ingrese codigo alumno</p>
-                <div class="input-group input-group-sm">
-                <form action="" id="resgitroAlumno_form">
-                      <input type="text" class="form-control" placeholder="Codigo Estudiante" id="code_alumno">
-                      <span class="input-group-append">
-                        <button type="submit" class="btn btn-info btn-flat">Gargar</button>
-                      </span>
-                  </form>
-                </div>
+                    <form  id="resgitroAlumno_form">
+                              <label for="codigo_alumno">Codigo Alumno</label>
+                              <input style="text-transform:uppercase;" value=""  onkeyup="javascript:this.value=this.value.toUpperCase();" required pattern="[A-Z0-9]+" type="text" maxlength="8" class="form-control" placeholder="Codigo" id="code_alumno">
+                             <div class="row">
+                               <div class="col-lg-6" ">
+                               <br>
+                                    <button type="submit" class="btn btn-outline-success  btn-block col-5">Gargar</button> 
+                               </div>
+                              <div class=" p-2 col-lg-6" id="mensaje-envio"></div></div>
+                     </form>
                 
                 
                 
              
-            <div class="item p-4">
-                <table class="table ">
+            <div class="item p-4 table-responsive-sm table-responsive-md table-responsive-xl">
+                <table class="table table-sm table-striped">
                     <thead class="thead-dark">
                         <tr>
                             <th>code_reserva</th>
@@ -73,27 +71,13 @@ if(empty($reserva)){
                             <th>fecha_reserva</th>
                             <th>estado_reserva</th>  
                             <th>code_usuario</th>
-                            <th>Actividad</th> 
+                            <th>Actividad</th>
                         </tr>
                      </thead>';
 
             $template.='
                     <tbody id="reserva_data">
-                        <tr>
-                             <th></th>
-                             <td></td>
-                             <td></td>
-                             <td></td>  
-                             <td></td>
-                             <td>
-                                <form action="" method="POST">
-                                    <input type="hidden" name="r" value="reserva-delete">
-                                    <input type="hidden" name="code_reserva" value="">
-                                    <input type="hidden" name="code_reserva" value="">
-                                    <input type="button" type="submit" value="Eliminar">
-                                </form> 
-                            </td> 
-                        </tr>
+                        
                     </tbody>
                     
             ';

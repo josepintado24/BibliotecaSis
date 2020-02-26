@@ -3,8 +3,8 @@
 $connection = mysqli_connect(
     'localhost', 'root', '', 'biblioteca_sis'
 );
-/*
-if($connection) {
+
+/*if($connection) {
  echo 'database is connected';
 }
 else{
