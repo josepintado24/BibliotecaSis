@@ -43,13 +43,22 @@ abstract class Model {
 
 	protected function get_query() {
 		$this->db_open();
-
+        $this->rows=null;
 		$result = $this->conn->query($this->query);
-		while( $this->rows[] = $result->fetch_assoc() );
+		while($this->rows[] = $result->fetch_assoc() );
 		$result->close();
 		$this->db_close();
 		return array_pop($this->rows);
 	}
+    /*protected function get_query_count() {
+        $this->db_open();
+        $json = array();
+        $result = $this->conn->query($this->query);
+
+        $result->close();
+        $this->db_close();
+        return $json[0][count];
+    }*/
     protected function get_query_ajax() {
         $this->db_open();
         $json = array();

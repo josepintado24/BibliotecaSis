@@ -54,13 +54,41 @@ if(empty($reserva)){
                              <div class="row">
                                <div class="col-lg-6" ">
                                <br>
-                                    <button type="submit" class="btn btn-outline-success  btn-block col-5">Gargar</button> 
+                                    <button type="submit" class="btn btn-outline-success  btn-block col-5 toastrDefaultSuccess">Gargar</button> 
                                </div>
                               <div class=" p-2 col-lg-6" id="mensaje-envio"></div></div>
                      </form>
                 
                 
                 
+            <div class="card card-warning card-outline">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-edit"></i>
+                  Toastr Examples
+                </h3>
+              </div>
+              <div class="card-body">
+                <button type="button" class="btn btn-success toastrDefaultSuccess">
+                  Launch Success Toast
+                </button>
+                <button type="button" class="btn btn-info toastrDefaultInfo">
+                  Launch Info Toast
+                </button>
+                <button type="button" class="btn btn-danger toastrDefaultError">
+                  Launch Error Toast
+                </button>
+                <button type="button" class="btn btn-warning toastrDefaultWarning">
+                  Launch Warning Toast
+                </button>
+                <div class="text-muted mt-3">
+                  For more examples look at <a href="https://codeseven.github.io/toastr/">https://codeseven.github.io/toastr/</a>
+                </div>
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+          <!-- /.col -->
              
             <div class="item p-4 table-responsive-sm table-responsive-md table-responsive-xl">
                 <table class="table table-sm table-striped">

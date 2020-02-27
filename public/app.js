@@ -33,7 +33,8 @@ $(document).ready(function () {
         };
         $.post('./controllers/insertReserva.php', postData,function (response) {
             fetchReservas();
-            if(response<=0){
+            console.log(response);
+            if(response==0){
                 let templante;
                  templante=`
                      <div class="alert alert-success col-lg-7">
@@ -42,7 +43,7 @@ $(document).ready(function () {
                     `;
                 $('#mensaje-envio').html(templante);
             }
-            else{
+            else if (response==1){
                 let templante;
                 templante=`
                      <div class="alert alert-danger col-lg-7" role="alert">
@@ -50,6 +51,18 @@ $(document).ready(function () {
                     </div>
                     `;
                 $('#mensaje-envio').html(templante);
+            }
+            else if (response==-1){
+                let templante;
+                templante=`
+                     <div class="alert alert-warning col-lg-7" role="alert">
+                        <a href="#" class="alert-link">No existe código</a>
+                    </div>
+                    `;
+                $('#mensaje-envio').html(templante);
+                $('.toastrDefaultSuccess').click(function() {
+                    toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+                });
             }
             //console.log(response);
             $('#resgitroAlumno_form').trigger('reset');
@@ -64,7 +77,7 @@ $(document).ready(function () {
             url:'./controllers/listAlumno.php',
             type:'GET',
             success:function (response) {
-                //console.log(response);
+                console.log(response);
                 let reservas = JSON.parse(response);
                 let template='';
                 reservas.forEach(reserva=>{
@@ -77,7 +90,7 @@ $(document).ready(function () {
                             <td>${reserva.code_usuario}</td>
                             <td>
                                 <button class="reserva_delete brn btn-danger">
-                                    eliminar
+                                    Cancelar
                                 </button>
                             </td>                            
                         </tr>
@@ -92,7 +105,7 @@ $(document).ready(function () {
         let element=$(this)[0].parentElement.parentElement;
         let id=$(element).attr('code_reserva');
         console.log(id);
-        $.post('./controllers/reservaDelete.php', {id}, function (response) {
+        $.post('./controllers/deleteReserva.php', {id}, function (response) {
                 console.log(response);
         })
     })
