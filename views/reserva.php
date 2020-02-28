@@ -52,48 +52,18 @@ if(empty($reserva)){
                               <label for="codigo_alumno">Codigo Alumno</label>
                               <input style="text-transform:uppercase;" value=""  onkeyup="javascript:this.value=this.value.toUpperCase();" required pattern="[A-Z0-9]+" type="text" maxlength="8" class="form-control" placeholder="Codigo" id="code_alumno">
                              <div class="row">
-                               <div class="col-lg-6" ">
+                               <div class="col-lg-6 pt-3" >
                                <br>
-                                    <button type="submit" class="btn btn-outline-success  btn-block col-5 toastrDefaultSuccess">Gargar</button> 
+                                    <button type="submit" class="btn btn-outline-success  btn-block col-5 " id="toastrbtn">Gargar</button> 
                                </div>
-                              <div class=" p-2 col-lg-6" id="mensaje-envio"></div></div>
+                              <div class=" pt-2 col-lg-6" id="mensaje-envio"></div></div>
                      </form>
-                
-                
-                
-            <div class="card card-warning card-outline">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-edit"></i>
-                  Toastr Examples
-                </h3>
               </div>
-              <div class="card-body">
-                <button type="button" class="btn btn-success toastrDefaultSuccess">
-                  Launch Success Toast
-                </button>
-                <button type="button" class="btn btn-info toastrDefaultInfo">
-                  Launch Info Toast
-                </button>
-                <button type="button" class="btn btn-danger toastrDefaultError">
-                  Launch Error Toast
-                </button>
-                <button type="button" class="btn btn-warning toastrDefaultWarning">
-                  Launch Warning Toast
-                </button>
-                <div class="text-muted mt-3">
-                  For more examples look at <a href="https://codeseven.github.io/toastr/">https://codeseven.github.io/toastr/</a>
-                </div>
-              </div>
-              <!-- /.card -->
-            </div>
-          </div>
-          <!-- /.col -->
-             
-            <div class="item p-4 table-responsive-sm table-responsive-md table-responsive-xl">
-                <table class="table table-sm table-striped">
+             <div class="item p-4 table-responsive-sm table-responsive-md table-responsive-xl ">
+                <table class="table table-sm table-striped " cellspacing="0" width="100%" id="contenidoReserva">
                     <thead class="thead-dark">
                         <tr>
+                            <th>#</th>
                             <th>code_reserva</th>
                             <th>code_alumno</th>
                             <th>fecha_reserva</th>

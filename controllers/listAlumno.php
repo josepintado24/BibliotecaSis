@@ -26,7 +26,7 @@
         $jsonString=json_encode($json);
         echo $jsonString;
     }else {
-        if((time>='14') and ($time<='19')){
+        if((time>='14') and ($time<='5')){
             $query="select * from reserva where  CAST(fecha_reserva AS DATE) = CAST(NOW() AS DATE)  and estado_reserva=1 and turno='M'";
             $result=mysqli_query($connection,$query);
             if(!$result){

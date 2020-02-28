@@ -35,6 +35,7 @@ $(document).ready(function () {
             fetchReservas();
             console.log(response);
             if(response==0){
+                $('#mensaje-envio').show();
                 let templante;
                  templante=`
                      <div class="alert alert-success col-lg-7">
@@ -42,8 +43,12 @@ $(document).ready(function () {
                     </div>
                     `;
                 $('#mensaje-envio').html(templante);
+                setTimeout(function() {
+                    $("#mensaje-envio").fadeOut(1500);
+                },1000);
             }
             else if (response==1){
+                $('#mensaje-envio').show();
                 let templante;
                 templante=`
                      <div class="alert alert-danger col-lg-7" role="alert">
@@ -51,8 +56,12 @@ $(document).ready(function () {
                     </div>
                     `;
                 $('#mensaje-envio').html(templante);
+                setTimeout(function() {
+                    $("#mensaje-envio").fadeOut(1500);
+                },100);
             }
             else if (response==-1){
+                $('#mensaje-envio').show();
                 let templante;
                 templante=`
                      <div class="alert alert-warning col-lg-7" role="alert">
@@ -60,9 +69,10 @@ $(document).ready(function () {
                     </div>
                     `;
                 $('#mensaje-envio').html(templante);
-                $('.toastrDefaultSuccess').click(function() {
-                    toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-                });
+                setTimeout(function() {
+                    $("#mensaje-envio").fadeOut(1500);
+                },1000);
+
             }
             //console.log(response);
             $('#resgitroAlumno_form').trigger('reset');
@@ -83,20 +93,37 @@ $(document).ready(function () {
                 reservas.forEach(reserva=>{
                     template+=`
                         <tr code_reserva="${reserva.code_reserva}">
-                            <td >${reserva.code_reserva}</td>
+                            <td></td>
+                            <td>${reserva.code_reserva}</td>
                             <td>${reserva.code_alumno}</td>
                             <td>${reserva.fecha_reserva}</td>
                             <td>${reserva.estado_reserva}</td>
                             <td>${reserva.code_usuario}</td>
-                            <td>
-                                <button class="reserva_delete brn btn-danger">
+                            <td><span class="table-remove">
+                                <button class="reserva_btn btn-danger btn-rounded btn-sm my-0">
                                     Cancelar
-                                </button>
+                                </button></span>
                             </td>                            
                         </tr>
                    `
                 });
                 $('#reserva_data').html(template);
+                $(document).ready(function() {
+                    var t = $('#contenidoReserva').DataTable( {
+                        "columnDefs": [ {
+                            "searchable": false,
+                            "orderable": false,
+                            "targets": 0
+                        } ],
+                        "order": [[ 1, 'asc' ]]
+                    } );
+
+                    t.on( 'order.dt search.dt', function () {
+                        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                            cell.innerHTML = i+1;
+                        } );
+                    } ).draw();
+                } );
 
             }
         })
