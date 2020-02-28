@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     fetchReservas();
     $('#resultadoAlumno').hide();
     $('#code_usuario').hide();
@@ -83,6 +84,21 @@ $(document).ready(function () {
         e.preventDefault();
     });
     function fetchReservas() {
+       /* var t = $('#contenidoReserva').DataTable( {
+            "destroy":true,
+            "columnDefs": [ {
+                "searchable": false,
+                "orderable": false,
+                "targets": 0
+            } ],
+            "order": [[ 1, 'asc' ]]
+        } );
+
+        t.on( 'order.dt search.dt', function () {
+            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            } );
+        } ).draw();*/
         $.ajax({
             url:'./controllers/listAlumno.php',
             type:'GET',
@@ -108,22 +124,9 @@ $(document).ready(function () {
                    `
                 });
                 $('#reserva_data').html(template);
-                $(document).ready(function() {
-                    var t = $('#contenidoReserva').DataTable( {
-                        "columnDefs": [ {
-                            "searchable": false,
-                            "orderable": false,
-                            "targets": 0
-                        } ],
-                        "order": [[ 1, 'asc' ]]
-                    } );
 
-                    t.on( 'order.dt search.dt', function () {
-                        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-                            cell.innerHTML = i+1;
-                        } );
-                    } ).draw();
-                } );
+
+
 
             }
         })

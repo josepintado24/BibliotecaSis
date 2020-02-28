@@ -11,43 +11,30 @@
             die('consulta fallida'.mysqli_error($connection));
         }
 
-        $json=array();
-        while($row = mysqli_fetch_array($result)) {
-            $json[] = array(
-                'code_reserva'  => $row['code_reserva'],
-                'code_alumno'  => $row['code_alumno'],
-                'fecha_reserva'  => $row['fecha_reserva'],
-                'estado_reserva'  => $row['estado_reserva'],
-                'code_usuario'  => $row['code_usuario']
 
-            );
-
+        while($data = mysqli_fetch_assoc($result)) {
+                $areglo['data'][]=array_map("utf8_decode",$data);
         }
-        $jsonString=json_encode($json);
+        $jsonString=json_encode($areglo);
         echo $jsonString;
+        mysqli_free_result($result);
+        mysqli_close($connection);
     }else {
-        if((time>='14') and ($time<='5')){
+        //if((time>='14') and ($time<='5')){
             $query="select * from reserva where  CAST(fecha_reserva AS DATE) = CAST(NOW() AS DATE)  and estado_reserva=1 and turno='M'";
             $result=mysqli_query($connection,$query);
             if(!$result){
                 die('consulta fallida'.mysqli_error($connection));
             }
 
-            $json=array();
-            while($row = mysqli_fetch_array($result)) {
-                $json[] = array(
-                    'code_reserva'  => $row['code_reserva'],
-                    'code_alumno'  => $row['code_alumno'],
-                    'fecha_reserva'  => $row['fecha_reserva'],
-                    'estado_reserva'  => $row['estado_reserva'],
-                    'code_usuario'  => $row['code_usuario']
-
-                );
-
-            }
-            $jsonString=json_encode($json);
-            echo $jsonString;
+        while($data = mysqli_fetch_assoc($result)) {
+            $areglo['data'][]=array_map("utf8_decode",$data);
         }
+        $jsonString=json_encode($areglo);
+        echo $jsonString;
+        mysqli_free_result($result);
+        mysqli_close($connection);
+        //}
 
     }
 

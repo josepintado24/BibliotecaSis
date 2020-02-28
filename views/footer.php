@@ -27,12 +27,13 @@ print ('
 <script src="./public/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="./public/dist/js/demo.js"></script>
-<script src="./public/app.js"></script>
+<!--<script src="./public/app.js"></script>-->
 <script src="./public/plugins/toastr/toastr.min.js"></script>
 <script src="./public/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- DataTables -->
 <script src="./public/plugins/datatables/jquery.dataTables.js"></script>
 <script src="./public/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<script src="./public/app1.js"></script>
 
 </body>
 </html>
