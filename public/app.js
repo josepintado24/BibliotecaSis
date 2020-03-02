@@ -32,7 +32,7 @@ $(document).ready(function () {
             code_alumno:$('#code_alumno').val(),
             code_usuario:code_usuario
         };
-        $.post('./controllers/insertReserva.php', postData,function (response) {
+        $.post('./controllers/setReserva.php', postData,function (response) {
             fetchReservas();
             console.log(response);
             if(response==0){
@@ -84,7 +84,7 @@ $(document).ready(function () {
         e.preventDefault();
     });
     function fetchReservas() {
-       /* var t = $('#contenidoReserva').DataTable( {
+       var t = $('#contenidoReserva').DataTable( {
             "destroy":true,
             "columnDefs": [ {
                 "searchable": false,
@@ -98,9 +98,9 @@ $(document).ready(function () {
             t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
                 cell.innerHTML = i+1;
             } );
-        } ).draw();*/
+        } ).draw();
         $.ajax({
-            url:'./controllers/listAlumno.php',
+            url:'./controllers/listReserva.php',
             type:'GET',
             success:function (response) {
                 console.log(response);

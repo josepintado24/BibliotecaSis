@@ -30,10 +30,13 @@ print ('
 <!--<script src="./public/app.js"></script>-->
 <script src="./public/plugins/toastr/toastr.min.js"></script>
 <script src="./public/plugins/sweetalert2/sweetalert2.min.js"></script>
+
 <!-- DataTables -->
 <script src="./public/plugins/datatables/jquery.dataTables.js"></script>
 <script src="./public/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="./public/app1.js"></script>
+<script src="./public/plugins/bootstrap/js/bootstrap.js"></script>
+
 
 </body>
 </html>

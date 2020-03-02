@@ -81,7 +81,7 @@ if(empty($reserva)){
                              <div class="row">
                                <div class="col-lg-6 pt-3" >
                                <br>
-                                    <button type="submit" class="btn btn-outline-success  btn-block col-5 " id="btn_listar">Gargar</button> 
+                                   <input id="guardarReserva" type="submit" class="btn btn-primary" value="Guardar">
                                </div>
                               <div class=" pt-2 col-lg-6" id="mensaje-envio"></div></div>
                      </form>

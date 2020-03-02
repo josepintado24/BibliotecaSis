@@ -34,6 +34,7 @@ $template='
   
   <link rel="shortcut icon" type="image/png" href="./public/img/favicon.png">
   <link rel="stylesheet" href="./public/dist/css/myStyle.css">
+  
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->

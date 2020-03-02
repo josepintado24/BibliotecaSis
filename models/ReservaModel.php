@@ -6,6 +6,7 @@ class ReservaModel extends Model {
 	    $mensaje=-1;
         date_default_timezone_set("America/Lima");
         $time= date("G");
+
         if ($this->validate_alumno($code_alumno)>=1){
             $mensaje=1;
 
@@ -55,13 +56,12 @@ class ReservaModel extends Model {
         return count($this->rows);
     }
 	public function del( $code_reserva = '' ) {
-		$this->query = "DELETE FROM reserva WHERE code_reserva = $code_reserva";
+		$this->query = "UPDATE `reserva` SET `estado_reserva` = '0' WHERE `reserva`.`code_reserva` = '$code_reserva'";
 		$this->set_query();
 	}
 	public function validate_alumno($code_alumno){
         $this->query ="select * from alumno where code_alumno='$code_alumno'";
         $this->get_query();
-        //echo count($this->rows);
         return count($this->rows);
     }
 
