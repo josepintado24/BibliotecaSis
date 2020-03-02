@@ -67,11 +67,10 @@ var list =function () {
         },
         "language":spanish,
         "columns":[
-            {"defaultContent": ""},
+            {"data":"nombre_alumno"},
             {"data":"code_alumno"},
             {"data":"fecha_reserva"},
-            {"data":"estado_reserva"},
-            {"data":"code_usuario"},
+            {"data":"turno"},
             {"data":"code_reserva"},
             {"defaultContent": "<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash'></i></button>"}
         ]

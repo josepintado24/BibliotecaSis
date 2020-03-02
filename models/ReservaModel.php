@@ -11,7 +11,7 @@ class ReservaModel extends Model {
             $mensaje=1;
 
             if ($this->searchReserva($code_alumno)<=0){
-                if (($time>='6') and ($time<='12')){
+                if (($time>='6') and ($time<='13')){
                     $this->query = "INSERT INTO reserva (code_reserva, code_alumno, fecha_reserva, estado_reserva, code_usuario, turno) VALUES (
                             NULL, '$code_alumno', current_timestamp(), '1', '$code_usuario','T')";
                     $this->set_query();

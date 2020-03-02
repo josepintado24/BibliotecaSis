@@ -90,13 +90,12 @@ if(empty($reserva)){
                 <table class="table table-sm table-striped " cellspacing="0" width="100%" id="contenidoReserva">
                     <thead class="thead-dark">
                         <tr>
-                            <th>#</th>
+                            <th>Alumno</th>
+                            <th>Código</th>
+                            <th>Fecha</th>
+                            <th>turno Asistir</th>  
                             <th>code_reserva</th>
-                            <th>code_alumno</th>
-                            <th>fecha_reserva</th>
-                            <th>estado_reserva</th>  
-                            <th>code_usuario</th>
-                            <th>Actividad</th>
+                            <th>Controles</th>
                         </tr>
                      </thead>';
 
