@@ -13,7 +13,7 @@ $reservaController=new ReservaController();
         case 'Guardar':
             $mensaje=$reservaController->set($code_alumno,$code_usuario);
             break;
-        case 'Elimnar':
+        case 'Eliminar':
             $mensaje=$reservaController->del($code_reserva);
             break;
     }

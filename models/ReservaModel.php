@@ -56,7 +56,7 @@ class ReservaModel extends Model {
         return count($this->rows);
     }
 	public function del( $code_reserva = '' ) {
-		$this->query = "UPDATE `reserva` SET `estado_reserva` = '0' WHERE `reserva`.`code_reserva` = '$code_reserva'";
+		$this->query = "UPDATE `reserva` SET `estado_reserva` = '0' WHERE `code_reserva` = '$code_reserva'";
 		$this->set_query();
 	}
 	public function validate_alumno($code_alumno){

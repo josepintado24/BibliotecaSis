@@ -2,12 +2,13 @@ $(document).ready(function() {
     $('#resultadoAlumno').hide();
     $('#code_usuario').hide();
     list();
-    save();
+    saveReserva();
+    cancelReserva();
 } );
 
-var save=function () {
+var saveReserva=function () {
     $('form').on("submit",function (e) {
-            e.preventDefault();
+        e.preventDefault();
         const postData={
             code_alumno:$('#code_alumno').val(),
             code_usuario:$('#code_usuario_num').text(),
@@ -28,6 +29,23 @@ var save=function () {
 
 }
 
+var cancelReserva=function () {
+    $('#cancelReserva').on("click",function (e) {
+        const postData={
+            code_reserva:$('#frmEliminarReserva #code_reserva').val(),
+            options:$('#frmEliminarReserva #opcion').val()
+        };
+        console.log(postData);
+        $.ajax({
+            method: 'POST',
+            url:'./controllers/setReserva.php',
+            data:postData
+        }).done(function (info) {
+
+            list();
+        })
+    });
+}
 var messageAlert=function(response){
     let templante;
     if(response==0){
@@ -65,7 +83,7 @@ var list =function () {
             "method":"POST",
             'url':"./controllers/listReserva.php"
         },
-        "language":spanish,
+        "language":spanishTable,
         "columns":[
             {"data":"nombre_alumno"},
             {"data":"code_alumno"},
@@ -87,7 +105,7 @@ var obtener_id_eliminar=function (tbody, table) {
     })
 }
 
-var spanish={
+var spanishTable={
     "sProcessing":     "Procesando...",
     "sLengthMenu":     "Mostrar _MENU_ registros",
     "sZeroRecords":    "No se encontraron resultados",

@@ -49,7 +49,7 @@ if(empty($reserva)){
               <div>
                 <form id="frmEliminarReserva" action="" method="POST">
                     <input type="hidden" id="code_reserva" name="code_reserva" value="">
-                    <input type="hidden" id="opcion" name="opcion" value="eliminar">
+                    <input type="hidden" id="opcion" name="opcion" value="Eliminar">
                     <!-- Modal -->
                     <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
                         <div class="modal-dialog" role="document">
@@ -62,7 +62,7 @@ if(empty($reserva)){
                                     ¿Está seguro de eliminar al usuario?<strong data-name=""></strong>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" onclick="" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                                    <button type="button" id="cancelReserva" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                 </div>
                             </div>

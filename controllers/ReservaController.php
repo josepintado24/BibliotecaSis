@@ -22,6 +22,6 @@ class ReservaController {
     }
 
 		public function del( $code_reserva = '' ) {
-		return $this->model->dele($code_reserva);
+		return $this->model->del($code_reserva);
 	}
 }
