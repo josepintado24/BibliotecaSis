@@ -14,7 +14,7 @@ var saveReserva=function () {
             code_usuario:$('#code_usuario_num').text(),
             options:$('#guardarReserva').val()
         };
-        console.log(postData);
+       console.log(postData);
         $.ajax({
             method: 'POST',
             url:'./controllers/setReserva.php',
@@ -41,9 +41,9 @@ var cancelReserva=function () {
             url:'./controllers/setReserva.php',
             data:postData
         }).done(function (info) {
-
             list();
         })
+
     });
 }
 var messageAlert=function(response){
@@ -93,15 +93,14 @@ var list =function () {
             {"defaultContent": "<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash'></i></button>"}
         ]
     });
-
-
-
     obtener_id_eliminar("#contenidoReserva tbody",table)
 }
 var obtener_id_eliminar=function (tbody, table) {
     $(tbody).on("click", "button.eliminar",function () {
+
         var data=table.row($(this).parents("tr")).data();
-        var code_reserva=$("#frmEliminarReserva #code_reserva").val(data.code_reserva);
+        $("#frmEliminarReserva #code_reserva").val(data.code_reserva);
+        console.log(data);
     })
 }
 

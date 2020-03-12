@@ -61,13 +61,13 @@ $template='
       
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a class="nav-link d-block" data-toggle="dropdown" href="#">
+        <a class="nav-link d-block" data-toggle="dropdown" href="">
           %s
         </a>
         
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+        <a class="nav-link"  href="?r=salir">
           <i class="fas fa-sign-out-alt"></i>
         </a>
       </li>

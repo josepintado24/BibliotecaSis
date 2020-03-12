@@ -1,143 +1,122 @@
-$(document).ready(function () {
+$(document).ready(function() {
+    var code_reserva, opcion;
+    opcion = 4;
 
-    fetchReservas();
-    $('#resultadoAlumno').hide();
-    $('#code_usuario').hide();
-    $('#search').keyup(function() {
-        if($('#search').val()) {
-            let search = $('#search').val();
-            $.ajax({
-                url: './controllers/searchAlumno.php',
-                data: {search:search},
-                type: 'POST',
-                success: function (response) {
-                    //console.log(response);
-                    let alumnos = JSON.parse(response);
-                    let templante='';
-                   alumnos.forEach(alumnos=>{
-                       templante+=`
-                     <li><a href="#" class="alumno-item">${alumnos.nombre_alumno}</a></li>
-                    `
-                   })
-                    $('#container').html(templante);
-                    $('#resultadoAlumno').show();
-                }
-            })
-        }
-
-    })
-    $('#resgitroAlumno_form').submit(function (e) {
-        let code_usuario=$('#code_usuario_num').text();
-        const postData={
-            code_alumno:$('#code_alumno').val(),
-            code_usuario:code_usuario
-        };
-        $.post('./controllers/setReserva.php', postData,function (response) {
-            fetchReservas();
-            console.log(response);
-            if(response==0){
-                $('#mensaje-envio').show();
-                let templante;
-                 templante=`
-                     <div class="alert alert-success col-lg-7">
-                        <a href="#" class="alert-link">Alumno registrado</a>
-                    </div>
-                    `;
-                $('#mensaje-envio').html(templante);
-                setTimeout(function() {
-                    $("#mensaje-envio").fadeOut(1500);
-                },1000);
-            }
-            else if (response==1){
-                $('#mensaje-envio').show();
-                let templante;
-                templante=`
-                     <div class="alert alert-danger col-lg-7" role="alert">
-                        <a href="#" class="alert-link">Código duplicado, denegado</a>
-                    </div>
-                    `;
-                $('#mensaje-envio').html(templante);
-                setTimeout(function() {
-                    $("#mensaje-envio").fadeOut(1500);
-                },100);
-            }
-            else if (response==-1){
-                $('#mensaje-envio').show();
-                let templante;
-                templante=`
-                     <div class="alert alert-warning col-lg-7" role="alert">
-                        <a href="#" class="alert-link">No existe código</a>
-                    </div>
-                    `;
-                $('#mensaje-envio').html(templante);
-                setTimeout(function() {
-                    $("#mensaje-envio").fadeOut(1500);
-                },1000);
-
-            }
-            //console.log(response);
-            $('#resgitroAlumno_form').trigger('reset');
-
-
-        });
-
-        e.preventDefault();
+    tablaUsuarios = $('#contenidoReserva').DataTable({
+        "ajax":{
+            "url": "./controllers/setReserva.php",
+            "method": 'POST', //usamos el metodo POST
+            "data":{opcion:opcion}, //enviamos opcion 4 para que haga un SELECT
+            "dataSrc":""
+        },
+        "language":spanishTable,
+        "columns":[
+            {"data":"code_reserva"},
+            {"data":"nombre_alumno"},
+            {"data":"code_alumno"},
+            {"data":"fecha_reserva"},
+            {"data":"turno"},
+            {"defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-danger btn-sm btnBorrar'><i class='fa fa-trash'></i></button></div></div>"}
+        ]
     });
-    function fetchReservas() {
-       var t = $('#contenidoReserva').DataTable( {
-            "destroy":true,
-            "columnDefs": [ {
-                "searchable": false,
-                "orderable": false,
-                "targets": 0
-            } ],
-            "order": [[ 1, 'asc' ]]
-        } );
 
-        t.on( 'order.dt search.dt', function () {
-            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-                cell.innerHTML = i+1;
-            } );
-        } ).draw();
+    var fila; //captura la fila, para editar o eliminar
+//submit para el Alta y Actualización
+    $('#frmReserva').submit(function(e){
+        opcion = 1;
+        code_usuario=1;
+        e.preventDefault(); //evita el comportambiento normal del submit, es decir, recarga total de la página
+        code_alumno = $.trim($('#codeAlumno').val());
+
         $.ajax({
-            url:'./controllers/listReserva.php',
-            type:'GET',
-            success:function (response) {
-                console.log(response);
-                let reservas = JSON.parse(response);
-                let template='';
-                reservas.forEach(reserva=>{
-                    template+=`
-                        <tr code_reserva="${reserva.code_reserva}">
-                            <td></td>
-                            <td>${reserva.code_reserva}</td>
-                            <td>${reserva.code_alumno}</td>
-                            <td>${reserva.fecha_reserva}</td>
-                            <td>${reserva.estado_reserva}</td>
-                            <td>${reserva.code_usuario}</td>
-                            <td><span class="table-remove">
-                                <button class="reserva_btn btn-danger btn-rounded btn-sm my-0">
-                                    Cancelar
-                                </button></span>
-                            </td>                            
-                        </tr>
-                   `
-                });
-                $('#reserva_data').html(template);
-
-
-
-
+            url: "./controllers/setReserva.php",
+            type: "POST",
+            datatype:"json",
+            data:  {code_alumno:code_alumno,opcion:opcion,code_usuario:code_usuario},
+            success: function(data) {
+                tablaUsuarios.ajax.reload(null, false);
+                messageAlert(data);
+                console.log(data);
+                $('#frmReserva').trigger('reset');
             }
-        })
-    }
-    $(document).on('click', '.reserva_delete', function () {
-        let element=$(this)[0].parentElement.parentElement;
-        let id=$(element).attr('code_reserva');
-        console.log(id);
-        $.post('./controllers/deleteReserva.php', {id}, function (response) {
-                console.log(response);
-        })
-    })
+        });
+    });
+
+
+
+//Borrar
+    $(document).on("click", ".btnBorrar", function(){
+        fila = $(this);
+        code_reserva = parseInt($(this).closest('tr').find('td:eq(0)').text()) ;
+        opcion = 3; //eliminar
+        var respuesta = confirm("¿Está seguro de cancelar reserva "+code_reserva+"?");
+        if (respuesta) {
+            $.ajax({
+                url: "./controllers/setReserva.php",
+                type: "POST",
+                datatype:"json",
+                data:  {opcion:opcion, code_reserva:code_reserva},
+                success: function() {
+                    tablaUsuarios.row(fila.parents('tr')).remove().draw();
+                }
+            });
+        }
+    });
+
 
 });
+
+
+var messageAlert=function(response){
+    let templante;
+    if(response==0){
+        templante=`
+                     <div class="alert alert-success col-lg-7 col-md-7">
+                        Alumno registrado
+                    </div>
+                    `;
+    }
+    else if (response==1){
+        templante=`
+                     <div class="alert alert-info col-lg-7 col-md-7"" role="alert">
+                        Código duplicado, denegados
+                    </div>
+                    `;
+    }
+    else if (response==-1){
+        templante=`
+                     <div class="alert alert-warning col-lg-7 col-md-7" role="alert">
+                       No existe código
+                    </div>
+                    `;
+    }
+    $('#mensaje-envio').show();
+    $('#mensaje-envio').html(templante);
+    setTimeout(function() {
+        $("#mensaje-envio").fadeOut(1500);
+    },1000);
+
+}
+
+var spanishTable={
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla =(",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+    "oAria": {
+    }
+}

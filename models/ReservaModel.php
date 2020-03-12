@@ -7,11 +7,10 @@ class ReservaModel extends Model {
         date_default_timezone_set("America/Lima");
         $time= date("G");
 
-        if ($this->validate_alumno($code_alumno)>=1){
+       if ($this->validate_alumno($code_alumno)>=1){
             $mensaje=1;
-
-            if ($this->searchReserva($code_alumno)<=0){
-                if (($time>='6') and ($time<='13')){
+           if ($this->searchReserva($code_alumno)<=0){
+                if (($time>='6') and ($time<='11')){
                     $this->query = "INSERT INTO reserva (code_reserva, code_alumno, fecha_reserva, estado_reserva, code_usuario, turno) VALUES (
                             NULL, '$code_alumno', current_timestamp(), '1', '$code_usuario','T')";
                     $this->set_query();
@@ -33,12 +32,22 @@ class ReservaModel extends Model {
 	}
 
 	public function get( $code_reserva = '' ) {
-		$this->query = ($code_reserva != '')
-			?"SELECT * FROM reserva WHERE code_reserva = $code_reserva"
-			:"SELECT * FROM reserva";
-		
+        $this->rows=null;
+        date_default_timezone_set("America/Lima");
+        $time= date("G");
+        if (($time>='6') and ($time<='11')){
+            $this->query = ($code_reserva != '')
+                ?"SELECT * FROM reserva WHERE code_reserva = $code_reserva"
+                :"SELECT a.nombre_alumno,r.code_alumno,r.fecha_reserva,r.turno, r.code_reserva FROM reserva as r INNER JOIN alumno as a  ON a.code_alumno=r.code_alumno  where  CAST(fecha_reserva AS DATE) = CAST(NOW() AS DATE)  and r.estado_reserva=1 and r.turno='T'";
+
+        }else{
+            $this->query = ($code_reserva != '')
+                ?"SELECT * FROM reserva WHERE code_reserva = $code_reserva"
+                :"SELECT a.nombre_alumno,r.code_alumno,r.fecha_reserva,r.turno, r.code_reserva FROM reserva as r INNER JOIN alumno as a  ON a.code_alumno=r.code_alumno  where  CAST(fecha_reserva AS DATE) = CAST(NOW() AS DATE)  and r.estado_reserva=1 and r.turno='M'";
+
+        }
+
 		$this->get_query();
-		$num_rows = count($this->rows);
 		$data = array();
 
 		foreach ($this->rows as $key => $value) {
@@ -52,7 +61,6 @@ class ReservaModel extends Model {
         $this->query = "select * from reserva where code_alumno='$code_alum' and CAST(fecha_reserva AS DATE) = CAST(NOW() AS DATE)";
 
         $this->get_query();
-        //echo count($this->rows);
         return count($this->rows);
     }
 	public function del( $code_reserva = '' ) {
