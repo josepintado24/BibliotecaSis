@@ -1,8 +1,30 @@
 $(document).ready(function() {
     var code_reserva, opcion;
     opcion = 4;
-
+    $('#code_usuario').hide();
     tablaUsuarios = $('#contenidoReserva').DataTable({
+        responsive: "true",
+        dom: 'Bfrtilp',
+        buttons:[
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fas fa-file-excel"></i> ',
+                titleAttr: 'Exportar a Excel',
+                className: 'btn btn-success'
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<i class="fas fa-file-pdf"></i> ',
+                titleAttr: 'Exportar a PDF',
+                className: 'btn btn-danger'
+            },
+            {
+                extend:    'print',
+                text:      '<i class="fa fa-print"></i> ',
+                titleAttr: 'Imprimir',
+                className: 'btn btn-info'
+            },
+        ],
         "ajax":{
             "url": "./controllers/setReserva.php",
             "method": 'POST', //usamos el metodo POST
@@ -18,13 +40,14 @@ $(document).ready(function() {
             {"data":"turno"},
             {"defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-danger btn-sm btnBorrar'><i class='fa fa-trash'></i></button></div></div>"}
         ]
+
     });
 
     var fila; //captura la fila, para editar o eliminar
 //submit para el Alta y Actualización
     $('#frmReserva').submit(function(e){
         opcion = 1;
-        code_usuario=1;
+        code_usuario=$('#code_usuario_num').text();
         e.preventDefault(); //evita el comportambiento normal del submit, es decir, recarga total de la página
         code_alumno = $.trim($('#codeAlumno').val());
 

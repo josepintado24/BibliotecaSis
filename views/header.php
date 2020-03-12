@@ -31,9 +31,11 @@ $template='
   <link rel="stylesheet" href="./public/plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!--font awesome con CDN-->  
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">  
   
   <link rel="shortcut icon" type="image/png" href="./public/img/favicon.png">
-  <link rel="stylesheet" href="./public/dist/css/myStyle.css">
+  <link rel="stylesheet" href="./public/dist/css/dataTable.css">
   
 </head>
 <body class="hold-transition sidebar-mini">
@@ -126,7 +128,7 @@ $template='
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+         <!-- <li class="nav-item has-treeview">
             <a href="?r=asistencia" class="nav-link">
               <i class="nav-icon fas fa-list-ol"></i>
               <p>
@@ -143,7 +145,7 @@ $template='
                
               </p>
             </a>
-          </li>
+          </li>-->
           
         </ul>
       </nav>

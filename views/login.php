@@ -42,7 +42,7 @@ print ('
 					</span>
 
                 <div class="wrap-input100 validate-input" data-validate = "Solo numeros">
-                    <input class="input100" type="password" required pattern="[0-9]+" maxlength="9" required name="pass" placeholder="Password">
+                    <input class="input100" type="password" required pattern="[0-9]+" maxlength="8" required name="pass" placeholder="Password">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
 							<i class="fa fa-building" aria-hidden="true"></i>

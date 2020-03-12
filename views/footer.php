@@ -36,6 +36,15 @@ print ('
 <script src="./public/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="./public/app.js"></script>
 <script src="./public/plugins/bootstrap/js/bootstrap.js"></script>
+<!-- para usar botones en datatables JS -->  
+<script src="./public/plugins/datatables-buttons/js/dataTables.buttons.js"></script>
+<script src="./public/plugins/datatables-buttons/js/buttons.html5.js"></script>
+<script src="./public/plugins/datatables-buttons/js/buttons.print.js"></script>
+<script src="./public/plugins/datatables-buttons/js/pdfmake.js"></script>
+<script src="./public/plugins/datatables-buttons/js/vfs_fonts.js"></script>
+<script src="./public/plugins/jszip/jszip.js"></script>
+
+
 
 
 </body>
