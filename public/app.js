@@ -3,6 +3,12 @@ $(document).ready(function() {
     opcion = 4;
     $('#code_usuario').hide();
     tablaUsuarios = $('#contenidoReserva').DataTable({
+        "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        } ],
+        "order": [[ 1, 'asc' ]],
         responsive: "true",
         dom: 'Bfrtilp',
         buttons:[
@@ -33,6 +39,7 @@ $(document).ready(function() {
         },
         "language":spanishTable,
         "columns":[
+            {"defaultContent":""},
             {"data":"code_reserva"},
             {"data":"nombre_alumno"},
             {"data":"code_alumno"},
@@ -42,6 +49,12 @@ $(document).ready(function() {
         ]
 
     });
+
+    tablaUsuarios.on( 'order.dt search.dt', function () {
+        tablaUsuarios.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
 
     var fila; //captura la fila, para editar o eliminar
 //submit para el Alta y Actualización
@@ -70,7 +83,7 @@ $(document).ready(function() {
 //Borrar
     $(document).on("click", ".btnBorrar", function(){
         fila = $(this);
-        code_reserva = parseInt($(this).closest('tr').find('td:eq(0)').text()) ;
+        code_reserva = parseInt($(this).closest('tr').find('td:eq(1)').text()) ;
         opcion = 3; //eliminar
         var respuesta = confirm("¿Está seguro de cancelar reserva "+code_reserva+"?");
         if (respuesta) {

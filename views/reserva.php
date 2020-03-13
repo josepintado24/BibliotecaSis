@@ -62,12 +62,13 @@
                 <table class="table table-sm table-striped " cellspacing="0" width="100%" id="contenidoReserva">
                     <thead class="thead-dark">
                         <tr>
-                            <th>cod Reserva</th>
-                            <th>Alumno</th>
-                            <th>Código</th>
-                            <th>Fecha</th>  
-                            <th>turno Asistir</th>
-                            <th>Controles</th>
+                            <th>#</th>
+                            <th>código Reserva</th>
+                            <th>alumno</th>
+                            <th>código</th>
+                            <th>fecha y hora</th>  
+                            <th>turno a asistir</th>
+                            <th>control</th>
                         </tr>
                      </thead>';
 
